@@ -1,12 +1,28 @@
 <script lang='ts'>
     import { login } from '../utilities/login';
-    import image from '$lib/dog2.png'
+    import { LoginSchema } from '$lib/schemas/LoginSchema';
+
+     import image from '$lib/dog2.png'
     
     let name: string;
     let email: string;
     
     const getLogin = () => {
-        login(name, email);
+        
+        const userLogin = {
+            name: name,
+            email: email
+        }
+
+        const safeParse = LoginSchema.safeParse(userLogin);
+
+        if(!safeParse.success){
+            console.log(safeParse.error);
+        }
+
+        if(safeParse.success){
+            login(name, email);
+        }
     }
     
     </script>
@@ -16,7 +32,7 @@
     
             <div class="inputBox">
     
-                <img src={image} alt="hand and dog paw touching">
+                <img src={image} alt="dog">
     
             <div class="inputField">
     
