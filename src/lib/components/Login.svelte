@@ -2,10 +2,13 @@
     import { login } from '../utilities/login';
     import { LoginSchema } from '$lib/schemas/LoginSchema';
 
-     import image from '$lib/dog2.png'
+    import image from '$lib/dog2.png'
     
     let name: string;
     let email: string;
+
+    let errorMessages: String[] = [];
+
     
     const getLogin = () => {
         
@@ -17,14 +20,13 @@
         const safeParse = LoginSchema.safeParse(userLogin);
 
         if(!safeParse.success){
-            console.log(safeParse.error);
+            errorMessages = safeParse.error.errors.map(err => err.message);
         }
 
         if(safeParse.success){
             login(name, email);
         }
     }
-    
     </script>
     
     <form on:submit|preventDefault={getLogin}>
@@ -34,22 +36,26 @@
     
                 <img src={image} alt="dog">
     
-            <div class="inputField">
+                <div class="inputField">
     
-                <label for="name">Name</label>
-                <input type="text" id="name" bind:value={name}/>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" bind:value={name}/>
+                    <div class="error"></div>
     
+                </div>
+                <div class="inputField">
+    
+                    <label for="email">Email</label>
+                    <input type="text" id="email" bind:value={email}/>
+    
+                </div>
             </div>
-            <div class="inputField">
-    
-                <label for="email">Email</label>
-                <input type="text" id="email" bind:value={email}/>
-    
-            </div>
-        </div>
-    
+
+            {#each errorMessages as error}
+                <li>{error}</li>
+            {/each}
+
             <button type='submit'>Login</button>
-    
         </div>
     </form>
     
@@ -70,6 +76,12 @@
         input {
             height: 3em;
             width: 25em;
+        }
+
+        li {
+            list-style-type: none;
+            color: rgb(208, 114, 114);
+            text-align: center;
         }
         
         button {

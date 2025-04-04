@@ -1,4 +1,3 @@
-
 <div class="nav-bar">
     
     <h2>DoggoFinder</h2>
