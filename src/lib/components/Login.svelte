@@ -2,7 +2,7 @@
     import { login } from '../utilities/getLogin';
     import { LoginSchema } from '$lib/schemas/LoginSchema';
 
-    import image from '$lib/dog2.png'
+    import image from '$lib/dog4.png'
     
     let name: string;
     let email: string;
@@ -36,15 +36,8 @@
     
             <div class="inputField">
     
-                <label for="name">Name</label>
-                <input type="text" id="name" bind:value={name}/>
-                <div class="error"></div>
-    
-            </div>
-            <div class="inputField">
-    
-                <label for="email">Email</label>
-                <input type="text" id="email" bind:value={email}/>
+                <input type="text" placeholder="name" id="name" bind:value={name}/>
+                <input type="text" placeholder="email" id="email" bind:value={email}/>
     
             </div>
         </div>
@@ -66,7 +59,7 @@
     img {
         align-self: center;
         margin-top: 3em;
-        height: 225px;
+        height: 240px;
         width: auto;
         object-fit: contain;
     }
@@ -74,12 +67,21 @@
     input {
         height: 3em;
         width: 25em;
+        background-color: rgb(69, 67, 84);
+        border: none;
+        color: white;
+        padding-left: 10px;
+        margin-top: 2em;
     }
 
     li {
         list-style-type: none;
-        color: rgb(208, 114, 114);
+        color: rgb(216, 66, 66);
         text-align: center;
+    }
+
+    label{
+        color: white;
     }
         
     button {
@@ -89,8 +91,8 @@
         border: none;
         margin-top: auto;
         cursor: pointer;
-        background-color: #1961ad;
-        border-bottom: 4px solid #073e78;
+        background-color: #433d88;
+        border-bottom: 4px solid #1b1f5a;
         border-radius: 4px;
         font-size: 16px;
         font-weight: 700;
@@ -99,19 +101,19 @@
         
     button:hover {
         align-self: center;
-        background-color: #0d4682;
+        background-color: #1b1f5a;
     
     }
     
     .loginForm {
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        box-shadow: rgba(0, 0, 0, 0.711) 0px 8px 24px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         height: 550px;
         width: 400px;
         margin-left: 38%;
-        margin-top: 12%;         
+        margin-top: 200px;         
     }
     
     .inputBox{
@@ -125,7 +127,14 @@
         flex-direction: column;
         align-self: center;
         margin: .5em;
+        margin-top: 1em;
     }
-    
+
+    @media (max-width: 600px){
+        .loginForm {
+            margin-top: 20%;
+            margin-left: 5%;
+        }
+    }
     
 </style>
