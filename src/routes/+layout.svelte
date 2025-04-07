@@ -1,3 +1,8 @@
+<script lang="ts">
+    import '@fortawesome/fontawesome-free/css/all.min.css'
+
+</script>
+
 <div class="nav-bar">
     
     <h2>DoggoFinder</h2>

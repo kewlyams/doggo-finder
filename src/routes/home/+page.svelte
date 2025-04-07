@@ -17,8 +17,5 @@
         height: 125vh;
     }
 
-
-
-
 </style>
 

@@ -1,7 +1,6 @@
 <script lang='ts'>
     import { login } from '../utilities/getLogin';
     import { LoginSchema } from '$lib/schemas/LoginSchema';
-
     import image from '$lib/dog4.png'
     
     let name: string;
@@ -14,7 +13,6 @@
             name: name,
             email: email
         }
-
         const safeParse = LoginSchema.safeParse(userLogin);
 
         if(!safeParse.success){
@@ -78,10 +76,6 @@
         list-style-type: none;
         color: rgb(216, 66, 66);
         text-align: center;
-    }
-
-    label{
-        color: white;
     }
         
     button {

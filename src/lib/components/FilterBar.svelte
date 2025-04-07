@@ -2,10 +2,15 @@
     import { goto } from "$app/navigation";
     import SortDogs from "./SortDogs.svelte";
     import SortBreed from "./SortBreed.svelte";
+    import { logout } from "$lib/utilities/getLogout";
 
     const reset = () => {
         goto('/home');
 
+    }
+
+    const logoutUser = () => {
+        logout();
     }
 
 </script>
@@ -18,11 +23,10 @@
         <SortBreed></SortBreed>
     </div>
 
-
     <div class = "buttons">
         <button onclick="{reset}">Reset</button>
+        <button onclick="{logoutUser}">Logout</button>
     </div>
-
 
 </div>
 
@@ -49,7 +53,7 @@
 
     .buttons{
         width: 100%;
-        height: 8em;
+        height: 10em;
         margin-top: auto;
     }
 
@@ -66,6 +70,7 @@
         background-color: rgb(45, 42, 61);
         color: white;
         border: none;
+        margin-bottom: .5em;
     }
 
     button:hover {

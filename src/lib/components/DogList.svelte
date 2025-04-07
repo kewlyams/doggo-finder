@@ -7,6 +7,11 @@
     import type { Doggo } from "$lib/types/Dog";
     import { goto } from "$app/navigation";
 
+    let dogIDs : string[];
+    let doggos : Doggo[]
+    let list_of_favorites: Doggo[] = [];
+    let totalDogs: number;
+
     let query_params: QueryParams = {
             breeds: [],
             ageMin: "0",
@@ -17,10 +22,10 @@
             zipCodes: []
     }
 
-    let dogIDs : string[];
-    let doggos : Doggo[]
+    $: list_of_favorites;
 
-    let totalDogs: number;
+
+    //file is long; need to split it up 
 
     const handleURL = (search: string) => {
         const params = new URLSearchParams(search);
@@ -54,6 +59,39 @@
             doggos = data;
         });
     }
+
+
+    // need to store somewhere better so it does not reset on refresh
+    const addFavorite = (dog: Doggo) => {
+        list_of_favorites = [...list_of_favorites, dog];
+        console.log(list_of_favorites);
+    }
+
+    const removeFavorite = (dog: Doggo) => {
+        list_of_favorites = list_of_favorites.filter((doggo) => doggo.id != dog.id);
+        console.log(list_of_favorites);
+    }
+
+    const toggleFav = (dog:Doggo) => {
+
+
+        if(list_of_favorites.some(({id}) => id == dog.id)){
+            console.log("unchecked");
+            removeFavorite(dog);
+        } else {
+            console.log("checked");
+            addFavorite(dog);
+        }
+       
+    }
+
+    const checkFav = (dog:Doggo) => {
+        return list_of_favorites.some(({id}) => id == dog.id);
+    }
+
+    //still need to match dog
+    //and clean up css
+
 </script>
 
 <div class = "doglist">
@@ -67,6 +105,13 @@
                     <p id="age"><b>Age: </b>{dog.age}</p>
                     <p id="zip"><b>Zipcode: </b>{dog.zip_code}</p>
                 </div>
+
+                <button 
+                class={checkFav(dog) ? 'favorite' : 'not-favorite'} 
+                onclick={() => toggleFav(dog)} aria-label="favorite button">
+                    {checkFav(dog) ? "remove from favories" : "add to favorites"}
+                </button>
+           
             </div>
         {/each}
     </div>
@@ -77,6 +122,29 @@
 </div>
 
 <style>
+
+    button {
+        width: 100%;
+        height: 2em;
+        background-color: rgb(45, 42, 61);
+        border: none;
+        border-radius: 3%;
+    }
+
+    button:hover {
+        background-color: rgb(33, 32, 46);
+    }
+
+    .favorite {
+        color: rgb(167, 20, 20);
+        cursor: pointer;
+        font-weight: 900;
+    }
+
+    .not-favorite {
+        color: rgb(153, 153, 153);
+        cursor: pointer;
+    }
 
     .nav {
         margin: 2em;
@@ -89,9 +157,13 @@
     }
 
     #breed {
-        margin-bottom: 1.5em;
+        margin-bottom: 1em;
     }
 
+    #zip {
+        margin-bottom: .5em;
+    }
+    
     p {
         margin: 0;
         padding: 0;
@@ -122,7 +194,7 @@
         box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
         border-radius: 3%;
         margin: 1em;
-        height: 400px;
+        height: 405px;
         width: 300px;
         text-align: center;
         flex: 1;   
@@ -148,12 +220,6 @@
         margin-right: auto;
         display: block;
         border-radius: 5%;
-    }
-
-    @media(max-width: 1100px){
-        .dog-container{
-            /* margin-left: 15%; */
-        }
     }
 
 </style>

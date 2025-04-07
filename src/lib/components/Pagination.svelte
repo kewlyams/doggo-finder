@@ -44,6 +44,7 @@
         const params = new URLSearchParams(search);
         const from = params.get("from");
 
+        //still need to make sure if there is no remainder to not add 1 
         current_page = ((Number(from) / 30) | 0) + 1;
 
     };
@@ -61,7 +62,6 @@
 </div>
 
 <style>
-
     .navigation {
         display: flex;
         flex-direction: row;

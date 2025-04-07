@@ -1,10 +1,10 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
-
     import { getBreedSearch } from "$lib/utilities/getBreedSearch";
 
     let list_of_all_breeds: string[];
+    let breedSelected: string;
 
     const getBreeds = () => {
         getBreedSearch().then((list:string[]) => {
@@ -14,13 +14,12 @@
 
     getBreeds();
 
-    let breedSelected: string;
-
 
     const submitSort = () => {
         updateSearchParams();
     }
 
+    //this is reuseable, move
     const updateSearchParams = () => {
         const newSearchParams = new URLSearchParams($page.url.search);
         if (breedSelected) newSearchParams.set('breed', breedSelected);
@@ -54,10 +53,6 @@
 
 
 <style>
-
-    p {
-        color: white;
-    }
 
     form {
         margin: 0;

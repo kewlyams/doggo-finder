@@ -4,6 +4,7 @@
     import { page } from '$app/stores';
     import { goto } from "$app/navigation";
 
+    let sortBySelected: string;
 
     let list_of_sorts: Sort[] = [
         {name: "Breed: Ascending", query: "breed:asc"},
@@ -14,12 +15,11 @@
         {name: "Age: Young to Old", query: "age:asc"},
     ]
 
-    let sortBySelected: string;
-
     const submitSort = () => {
         updateSearchParams();
     }
 
+    //this is reusable, move
     const updateSearchParams = () => {
         const newSearchParams = new URLSearchParams($page.url.search);
         if (sortBySelected) newSearchParams.set('sort', sortBySelected);
