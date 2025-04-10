@@ -3,28 +3,19 @@
 
     import { page } from '$app/stores';
     import { goto } from "$app/navigation";
+    import { SortListDefault } from "$lib/utilities/SortListDefault";
 
     let sortBySelected: string;
-
-    let list_of_sorts: Sort[] = [
-        {name: "Breed: Ascending", query: "breed:asc"},
-        {name: "Breed: Descending", query: "breed:desc"},
-        {name: "Name: Ascending", query: "name:asc"},
-        {name: "Name: Descending", query: "name:desc"},
-        {name: "Age: Old to Young", query: "age:desc"},
-        {name: "Age: Young to Old", query: "age:asc"},
-    ]
+    const list_of_sorts = SortListDefault;
 
     const submitSort = () => {
         updateSearchParams();
     }
 
-    //this is reusable, move
     const updateSearchParams = () => {
         const newSearchParams = new URLSearchParams($page.url.search);
         if (sortBySelected) newSearchParams.set('sort', sortBySelected);
         newSearchParams.set('from', "0");
-
         goto(`${$page.url.pathname}?${newSearchParams.toString()}`);
     }
 
@@ -47,7 +38,6 @@
         {/each}
     </select>
 </form>
-
 
 <style>
 

@@ -1,19 +1,27 @@
 <script lang='ts'>
-    import { login } from '../utilities/getLogin';
-    import { LoginSchema } from '$lib/schemas/LoginSchema';
+    import { login } from '$lib/services/getLogin';
+    import { LoginValidation } from '$lib/utilities/LoginValidation';
     import image from '$lib/dog4.png'
+    import { onMount } from 'svelte';
+    import { auth } from '$lib/stores/auth';
+    import { goto } from '$app/navigation';
     
     let name: string;
     let email: string;
     let errorMessages: String[] = [];
 
+    onMount(() => {
+        if($auth == "true"){
+            goto('/');
+        }
+    })
+
     const getLogin = () => {
-        
         const userLogin = {
             name: name,
             email: email
         }
-        const safeParse = LoginSchema.safeParse(userLogin);
+        const safeParse = LoginValidation.safeParse(userLogin);
 
         if(!safeParse.success){
             errorMessages = safeParse.error.errors.map(err => err.message);

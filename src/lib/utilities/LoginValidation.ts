@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const LoginSchema = z.object({
+export const LoginValidation = z.object({
     name: z.string(
         {message: 'Invalid name'}
     ).min(1,

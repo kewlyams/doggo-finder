@@ -1,5 +1,7 @@
 import { goto } from "$app/navigation";
 import { api } from "./api";
+import { auth } from "$lib/stores/auth";
+import {resetFavorites} from "$lib/stores/favorites";
 
 export const getBreedSearch = () => {
 
@@ -13,7 +15,9 @@ export const getBreedSearch = () => {
         .catch((error) => {
             console.log(error)
             if (error.status = 401){
-                goto("/");
+                auth.set("false");
+                resetFavorites();
+                goto("/login");
             }
         });
     }

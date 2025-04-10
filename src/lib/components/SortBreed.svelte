@@ -1,7 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
-    import { getBreedSearch } from "$lib/utilities/getBreedSearch";
+    import { getBreedSearch } from "$lib/services/getBreedSearch";
 
     let list_of_all_breeds: string[];
     let breedSelected: string;
@@ -14,24 +14,19 @@
 
     getBreeds();
 
-
     const submitSort = () => {
         updateSearchParams();
     }
 
-    //this is reuseable, move
     const updateSearchParams = () => {
         const newSearchParams = new URLSearchParams($page.url.search);
         if (breedSelected) newSearchParams.set('breed', breedSelected);
-
         newSearchParams.set('from', "");
-
         goto(`${$page.url.pathname}?${newSearchParams.toString()}`);
     }
 
     const handleURL = (search: string) => {
         const params = new URLSearchParams(search);
-
         breedSelected = params.get('breed') || "";
     };
 

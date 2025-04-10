@@ -46,7 +46,6 @@
 
         //still need to make sure if there is no remainder to not add 1 
         current_page = ((Number(from) / 30) | 0) + 1;
-
     };
 
     $: handleURL($page.url.search)

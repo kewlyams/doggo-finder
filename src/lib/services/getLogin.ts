@@ -1,5 +1,6 @@
-import {api} from '../utilities/api';
+import {api} from './api';
 import { goto } from "$app/navigation";
+import { auth } from '$lib/stores/auth';
 
 export const login = (name:string, email:string) => {
  return api()
@@ -9,7 +10,8 @@ export const login = (name:string, email:string) => {
  })
  .then((res) => {
     if(res.status == 200){
-        goto('/home');
+      auth.set("true");
+      goto('/');
     }
  })
 }
