@@ -3,10 +3,12 @@
     import { page } from "$app/stores";
   
     let current_page = 1;
+    // $: current_page;
     let from_value = 0;
     let last_from = 0;
 
     export let totalDogs = 0;
+    console.log(totalDogs);
 
     const goNextPage = () => {
         if((from_value + 30) < totalDogs){
@@ -44,8 +46,19 @@
         const params = new URLSearchParams(search);
         const from = params.get("from");
 
-        //still need to make sure if there is no remainder to not add 1 
+        // ((Number(from) % 30) == 0 ) ? ((Number(from) / 30) | 0) : ((Number(from) / 30) | 0) + 1
+
+        //  current_page ? (Number(from) % 30) == 0 )
+        // //still need to make sure if there is no remainder to not add 1 
         current_page = ((Number(from) / 30) | 0) + 1;
+
+        // if(((Number(from) % 30))) {
+        //     current_page = ((Number(from) / 30) | 0) + 1;
+        //     console.log(current_page + "in true");
+        // } else {
+
+        //     current_page = ((Number(from) / 30) | 0);
+        // }
     };
 
     $: handleURL($page.url.search)

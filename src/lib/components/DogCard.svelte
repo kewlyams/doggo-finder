@@ -51,7 +51,7 @@
         border-radius: 3%;
         margin: 1em;
         height: 405px;
-        width: 300px;
+        width: 255px;
         text-align: center;
         min-width: 0;
         background-color: rgb(35, 35, 48);

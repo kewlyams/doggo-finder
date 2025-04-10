@@ -21,7 +21,6 @@
     const updateSearchParams = () => {
         const newSearchParams = new URLSearchParams($page.url.search);
         if (breedSelected) newSearchParams.set('breed', breedSelected);
-        newSearchParams.set('from', "");
         goto(`${$page.url.pathname}?${newSearchParams.toString()}`);
     }
 

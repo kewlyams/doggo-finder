@@ -3,7 +3,7 @@
 
     import { page } from '$app/stores';
     import { goto } from "$app/navigation";
-    import { SortListDefault } from "$lib/utilities/SortListDefault";
+    import { SortListDefault } from "$lib/constants/SortListDefault";
 
     let sortBySelected: string;
     const list_of_sorts = SortListDefault;
@@ -15,7 +15,6 @@
     const updateSearchParams = () => {
         const newSearchParams = new URLSearchParams($page.url.search);
         if (sortBySelected) newSearchParams.set('sort', sortBySelected);
-        newSearchParams.set('from', "0");
         goto(`${$page.url.pathname}?${newSearchParams.toString()}`);
     }
 

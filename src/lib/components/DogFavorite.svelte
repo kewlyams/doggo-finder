@@ -5,11 +5,7 @@
     export let dog:Doggo
 
     const toggleFav = (dogID: string) => {
-        if($favorites.some((id) => id == dogID)){
-            removeFavorite(dogID);
-        } else {
-            addFavorite(dogID);
-        }
+        $favorites.some((id) => id == dogID) ? removeFavorite(dogID) : addFavorite(dogID);
     }
 
     const checkFav = (dogID:string) => {

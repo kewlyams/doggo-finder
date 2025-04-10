@@ -10,13 +10,20 @@
     import { getDogSearchById } from "$lib/services/getDogSearchById";
     import SortDogs from "$lib/components/SortDogs.svelte";
     import Options from "$lib/components/Options.svelte";
-    import Pagination from "$lib/components/Pagination.svelte";
 
-    import {QueryParamsDefault} from "$lib/utilities/QueryParamsDefault"
+    import {QueryParamsDefault} from "$lib/constants/QueryParamsDefault"
     import type { Doggo } from "$lib/types/Dog";
+    import FirstPage from "$lib/components/Navigation/FirstPage.svelte";
+    import PrevPage from "$lib/components/Navigation/PrevPage.svelte";
+    import NextPage from "$lib/components/Navigation/NextPage.svelte";
+    import LastPage from "$lib/components/Navigation/LastPage.svelte";
 
-    let doggos : Doggo[]
+    let doggos : Doggo[];
     let totalDogs: number = 0;
+    let currentPage: number = 1;
+    let from_value: number = 0;
+    $: from_value;
+    $: currentPage;
 
     let query_params = QueryParamsDefault;
 
@@ -35,6 +42,9 @@
         query_params.breeds = breed ? [breed] : [];
         query_params.from = Number(from) || 0;
         query_params.sort = sortBy || "breed:asc";
+
+        from_value = Number(from);
+        currentPage = ((Number(from) / 30) | 0) + 1;
         getDogs();
     };
 
@@ -74,7 +84,11 @@
         </div>
 
         <div class="navigation">
-            <Pagination totalDogs={totalDogs}></Pagination>
+             <FirstPage bind:from_value={from_value}></FirstPage>
+             <PrevPage bind:from_value={from_value}></PrevPage>
+             <p>{currentPage}</p>
+             <NextPage bind:from_value={from_value} totalDogs={totalDogs}></NextPage>
+             <LastPage bind:from_value={from_value} totalDogs={totalDogs}></LastPage>
         </div>
     </div>
     
@@ -85,6 +99,11 @@
         display: flex;
         flex-direction: row;
         height: 125vh;
+    }
+
+    .navigation {
+        display: flex;
+        flex-direction: row;
     }
 
     .dog-results{
@@ -99,12 +118,17 @@
     .dog-list {
         display: flex;
         flex-wrap: wrap;
+        width: 100%;
+        justify-content: center;
+        align-items: center;    
+        margin: 0;
+        padding: 0;
     }
 
     .filterbar{
         background-color: rgb(26, 26, 37);
         height: 100vh;
-        width: 15vw;
+        width: 15%;
         margin: 0;
         padding: 0;
         display: flex;
@@ -126,6 +150,11 @@
         height: 10em;
         margin-bottom: 5em;
         margin-top: auto;
+    }
+
+    p {
+        color: white;
+        margin: 1em;
     }
 
     h2 {
