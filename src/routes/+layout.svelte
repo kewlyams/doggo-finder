@@ -1,25 +1,25 @@
 <script lang="ts">
-    import '@fortawesome/fontawesome-free/css/all.min.css'
-
+    import { Toaster } from "$lib/components/ui/sonner";
+    import "../app.css";
+    import '@fontsource-variable/quicksand';
 </script>
 
 <div class="nav-bar">
-    
     <h2>DoggoFinder</h2>
-
 </div>
 
 <slot></slot>
+<Toaster></Toaster>
 
 <style>
     
     :global(body) {
+        font-family: 'Quicksand Variable', sans-serif;
         margin: 0;
 	    padding: 0;
         background-color: rgb(32, 32, 44);
         overflow: hidden;
     }
-
 
     .nav-bar {
         width: 100%;
@@ -35,8 +35,8 @@
         width: 100%;
         font-size: 2em;
         margin-left: 1em;
-        margin-top: .5em;
-        color: #d4d4d4;
+        margin-top: 8px;
+        color: #a46ede;
     }
 
 </style>

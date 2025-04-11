@@ -1,12 +1,10 @@
 <script lang="ts">
-    import type { Sort } from "$lib/types/Sort";
-
     import { page } from '$app/stores';
     import { goto } from "$app/navigation";
     import { SortListDefault } from "$lib/constants/SortListDefault";
 
     let sortBySelected: string;
-    const list_of_sorts = SortListDefault;
+    const sortList = SortListDefault;
 
     const submitSort = () => {
         updateSearchParams();
@@ -14,7 +12,8 @@
 
     const updateSearchParams = () => {
         const newSearchParams = new URLSearchParams($page.url.search);
-        if (sortBySelected) newSearchParams.set('sort', sortBySelected);
+        if (sortBySelected) newSearchParams.set('sort', sortBySelected)
+        newSearchParams.set('from', '0');
         goto(`${$page.url.pathname}?${newSearchParams.toString()}`);
     }
 
@@ -30,7 +29,7 @@
 <form on:change={submitSort}>
     <label class="feature-label" for="sort-by">Sort By:</label>
     <select class="user-input" id="sort-by" bind:value={sortBySelected}>
-        {#each list_of_sorts as sort (sort)}
+        {#each sortList as sort (sort)}
              <option value={sort.query}>
                 {sort.name}
             </option>
@@ -41,11 +40,11 @@
 <style>
 
 form {
-        margin: 0;
+        margin: 1em;
         padding: 0;
         display: flex;
         flex-direction: column;
-        width: 90%;
+        width: 15em;
         height: 3em;
     }
 

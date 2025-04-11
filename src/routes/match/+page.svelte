@@ -1,12 +1,13 @@
 <script lang="ts">
-    import DogCard from "$lib/components/DogCard.svelte";
     import { onMount } from "svelte";
     import { getDogMatch } from "$lib/services/getDogMatch";
     import { favorites } from "$lib/stores/favorites";
     import { getDogSearchById } from "$lib/services/getDogSearchById";
+    import DogCard from "$lib/components/DogCard.svelte";
+    import Button from "$lib/components/ui/button/button.svelte";
     import type { Doggo } from "$lib/types/Dog";
 
-    let dog : Doggo ;
+    let dog : Doggo;
     $: dog;
 
     onMount(() => {
@@ -26,6 +27,7 @@
 {#if dog}
     <div class="matched-dog">
         <DogCard matched={1} dog={dog}></DogCard>
+        <Button class=" mt-8 border 4 border-purple-500 hover:bg-purple-500" onclick={getMatch}>Get a different match</Button>
     </div>
 {/if}
 
@@ -34,6 +36,7 @@
         width: 100%;
         height: 75vh;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
     }

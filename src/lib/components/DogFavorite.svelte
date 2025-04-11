@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type { Doggo } from "$lib/types/Dog";
     import {favorites, addFavorite, removeFavorite} from "$lib/stores/favorites";
+    import type { Doggo } from "$lib/types/Dog";
 
     export let dog:Doggo
 
@@ -16,32 +16,33 @@
 
     <button 
         class={checkFav(dog.id) ? 'favorite' : 'not-favorite'} 
-        onclick={() => toggleFav(dog.id)} aria-label="favorite button">
-        {checkFav(dog.id) ? "remove from favories" : "add to favorites"}
+        onclick={() => toggleFav(dog.id)}>
+        {checkFav(dog.id) ? "-" : "+"}
     </button>
 
 
 <style>
     button {
         width: 100%;
-        height: 2em;
+        height: 100%;
         background-color: rgb(45, 42, 61);
         border: none;
-        border-radius: 3%;
+        border-radius: 10px;
     }
 
     button:hover {
-        background-color: rgb(33, 32, 46);
+        background-color: #a46ede;
     }
 
     .favorite {
-        color: rgb(167, 20, 20);
+        color: rgb(255, 255, 255);
         cursor: pointer;
         font-weight: 900;
+        background-color:#a46ede;
     }
 
     .not-favorite {
-        color: rgb(153, 153, 153);
+        color: rgb(255, 255, 255);
         cursor: pointer;
     }
 </style>

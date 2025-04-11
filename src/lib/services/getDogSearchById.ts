@@ -2,20 +2,19 @@ import { goto } from "$app/navigation";
 import { api } from "./api";
 import { auth } from "$lib/stores/auth";
 import { resetFavorites } from "$lib/stores/favorites";
+import { toast } from "svelte-sonner";
 
 export const getDogSearchById = (ids: string[]) => {
     return api()
     .post("/dogs", ids)
     .then((res) => {
-        if(res.status = 200){
-            return res.data;
-        }
+        return res.data;
     })
     .catch((error) => {
-        if (error.status = 401){
-            auth.set("false");
-            resetFavorites();
-            goto("/login");
-        }
+        (error.status == 401) ? toast("401: Unauthorized") : toast("Oops something went wrong: " + error.status);
+        auth.set("false");
+        resetFavorites();
+        goto("/login");
+        
     });
 }

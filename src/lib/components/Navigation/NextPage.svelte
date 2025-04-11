@@ -2,26 +2,25 @@
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
 
-    export let from_value: number;
+    export let fromValue: number;
     export let totalDogs = 0;
 
     const goNextPage = () => {
-        if((from_value + 30) < totalDogs){
-            from_value = from_value + 30;
+        if((fromValue + 30) < totalDogs){
+            fromValue = fromValue + 30;
             updateSearchParams();
         }
     }
 
     const updateSearchParams = () => {
         const newSearchParams = new URLSearchParams($page.url.search);
-        newSearchParams.set('from', from_value.toString());
-
+        newSearchParams.set('from', fromValue.toString());
         goto(`${$page.url.pathname}?${newSearchParams.toString()}`);
     }
 
 </script>
 
-<button on:click={goNextPage}>&gt</button>
+    <button on:click={goNextPage}>&gt</button>
 
 <style>
     button {
@@ -30,5 +29,9 @@
         color: white;
         background-color: rgb(18, 18, 26);
         border: none;
+    }
+
+    button:hover {
+        color: #a46ede;
     }
 </style>

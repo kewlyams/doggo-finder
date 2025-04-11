@@ -2,6 +2,7 @@
     import { goto } from "$app/navigation";
     import { resetFavorites } from "$lib/stores/favorites";
     import { logout } from "$lib/services/getLogout";
+    import Button from "./ui/button/button.svelte";
 
     const reset = () => {
         goto('/');
@@ -9,21 +10,6 @@
     }
 </script>
 
-<button onclick="{() => goto('/match')}">Match</button>
-<button onclick="{reset}">Reset</button>
-<button onclick="{() => logout()}">Logout</button>
-
-<style>
-    button {
-        width: 100%;
-        height: 3em;
-        background-color: rgb(45, 42, 61);
-        color: white;
-        border: none;
-        margin-bottom: .5em;
-    }
-
-    button:hover {
-        background-color: rgb(33, 32, 46);
-    }
-</style>
+<Button class="border 4 border-purple-500 hover:bg-purple-500" onclick={() => goto('/match')}>Match</Button>
+<Button class="border 4 border-purple-500 hover:bg-purple-500 ml-5" onclick={reset}>Reset</Button>
+<Button class="border 4 border-purple-500 hover:bg-purple-500 ml-5" onclick={() => logout()}>Logout</Button>

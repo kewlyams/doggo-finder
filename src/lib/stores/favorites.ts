@@ -1,6 +1,5 @@
 import { writable } from "svelte/store";
 
-
 const stored = localStorage.getItem("favorites");
 const init: string[] = stored ? JSON.parse(stored) : [];
 
