@@ -1,6 +1,6 @@
-# sv
+# Doggofinder
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Doggofinder helps users find their furry match. 
 
 ## Running Locally
 
