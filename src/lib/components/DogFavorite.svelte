@@ -17,7 +17,7 @@
     <button 
         class={checkFav(dog.id) ? 'favorite' : 'not-favorite'} 
         onclick={() => toggleFav(dog.id)}>
-        {checkFav(dog.id) ? "-" : "+"}
+        {checkFav(dog.id) ? '-' : '+'}
     </button>
 
 

@@ -11,10 +11,14 @@ export const getDogMatch = (ids : string[]) => {
         return res.data;
     })
     .catch((error) => {
-        (error.status == 401) ? toast("401: Unauthorized") : toast("Oops something went wrong: " + error.status);
-        auth.set("false");
-        resetFavorites();
-        goto("/login");
-        
+        if (error.status == 400) {
+            toast("Oops! You have no favorites...");
+            goto("/");
+        } else if(error.status == 401 || error){
+            toast("401: Unauthorized");
+            auth.set("false");
+            resetFavorites();
+            goto("/login");
+        }
     });
 }
